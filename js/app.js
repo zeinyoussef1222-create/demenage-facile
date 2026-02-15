@@ -390,10 +390,37 @@ function updateStepIndicators(step) {
         ind.classList.toggle('active', i === step);
         ind.classList.toggle('completed', i < step);
     });
-
     // Smooth scroll to form top
     document.getElementById('form-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+// ── Smart Packs Logic ──────────────────────────────────────
+window.applyPack = function (packId) {
+    const packs = {
+        student: ['boursorama', 'caf', 'ameli', 'orange'],
+        family: ['impots', 'edf', 'ameli', 'caf', 'ca', 'syndic'],
+        freelance: ['urssaf', 'boursorama', 'impots', 'axa'],
+        owner: ['impots', 'edf', 'syndic', 'veolia']
+    };
+
+    const selectedIds = packs[packId] || [];
+    state.selectedOrganismes.clear();
+    selectedIds.forEach(id => state.selectedOrganismes.add(id));
+
+    // Update UI
+    document.querySelectorAll('.org-checkbox').forEach(cb => {
+        cb.checked = state.selectedOrganismes.has(cb.value);
+        // Add visual feedback to parent card
+        const card = cb.closest('.organism-card');
+        if (card) {
+            card.classList.toggle('selected', cb.checked);
+        }
+    });
+
+    updateCounter();
+    showToast(`Pack ${packId} appliqué ! 🚀`, 'success');
+};
+
 
 // ── Generate Documents ──────────────────────────────────────
 function generateDocuments() {
@@ -404,34 +431,53 @@ function generateDocuments() {
         ancienneAdresse: document.getElementById('ancienne-adresse').value.trim(),
         nouvelleAdresse: document.getElementById('nouvelle-adresse').value.trim(),
         dateDemenagement: document.getElementById('date-demenagement').value,
-        ville: document.getElementById('ville-actuelle').value.trim(),
     };
 
-    // Get selected organisms
-    const selectedOrgs = Array.from(state.selectedOrganismes).map(id => getOrganismeById(id)).filter(Boolean);
-
-    // Generate all documents
-    state.documents = genererTousDocuments(selectedOrgs, state.userData);
-
-    // Initialize tracker
-    state.documents.forEach(doc => {
-        state.tracker[doc.organisme.id] = 'pending';
-    });
-
-    // Navigate to results
-    renderResults();
-    navigateTo('results');
-
-    // Celebration confetti!
-    if (window.confetti) {
-        confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#6366f1', '#a78bfa', '#06b6d4']
-        });
+    // Show loading state
+    const btn = document.getElementById('btn-generate');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '⚙️ Analyse en cours...';
     }
+
+    // Simulate "Intelligence"
+    setTimeout(async () => {
+        try {
+            const { ORGANISMES } = await import('./data.js');
+            const selectedList = ORGANISMES.filter(org => state.selectedOrganismes.has(org.id));
+
+            state.documents = selectedList;
+
+            // Initialize tracker
+            state.documents.forEach(doc => {
+                state.tracker[doc.id] = 'pending';
+            });
+
+            // Navigate to results
+            renderResults();
+            navigateTo('results');
+
+            // Celebration confetti!
+            if (window.confetti) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#4f46e5', '#fb7185', '#06b6d4']
+                });
+            }
+        } catch (err) {
+            console.error('Error loading data:', err);
+            showToast('Erreur lors de la génération.', 'error');
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '✨ Générer mes documents';
+            }
+        }
+    }, 1200);
 }
+
 
 // ── Results Page ────────────────────────────────────────────
 function renderResults() {
@@ -445,30 +491,37 @@ function renderResults() {
 
     container.innerHTML = `
     <div class="results-header">
-      <div class="results-celebration">🎉</div>
-      <h2>Vos documents sont prêts !</h2>
-      <p>Nous avons généré <strong>${totalDocs} document(s)</strong> pour votre déménagement.</p>
+      <div class="results-celebration animate-in">🎉</div>
+      <h2 class="animate-in">C'est prêt !</h2>
+      <p class="animate-in">Nous avons préparé <strong>${totalDocs} document(s)</strong> pour faciliter votre départ.</p>
     </div>
 
     <div class="results-stats">
-      <div class="stat-card">
+      <div class="stat-card animate-in" style="animation-delay: 0.1s">
         <div class="stat-icon">✉️</div>
         <div class="stat-number">${courriers}</div>
         <div class="stat-label">Courrier(s)</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card animate-in" style="animation-delay: 0.2s">
         <div class="stat-icon">📧</div>
         <div class="stat-number">${emails}</div>
         <div class="stat-label">Email(s)</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card animate-in" style="animation-delay: 0.3s">
         <div class="stat-icon">📊</div>
         <div class="stat-number" id="completion-percent">0%</div>
-        <div class="stat-label">Complété</div>
+        <div class="stat-label">Complétion</div>
       </div>
     </div>
 
-    <div class="results-actions">
+    <div class="progress-bar-container animate-in" style="animation-delay: 0.4s">
+        <div class="progress-label">Progression de vos démarches</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="results-progress-fill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div class="results-actions animate-in" style="animation-delay: 0.5s">
       <button class="btn-primary btn-glow" id="btn-download-all" title="Télécharger tous les courriers en un seul PDF">
         📥 Télécharger tous les PDF
       </button>
@@ -477,12 +530,6 @@ function renderResults() {
       </button>
     </div>
 
-    <div class="progress-bar-container">
-      <div class="progress-label">Avancement global</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-      </div>
-    </div>
 
     <div class="documents-list" id="documents-list">
       ${state.documents.map((doc, index) => renderDocumentCard(doc, index)).join('')}

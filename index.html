@@ -70,46 +70,47 @@
         <!-- VIEW: LANDING PAGE                                      -->
         <!-- ═══════════════════════════════════════════════════════ -->
         <div id="view-landing" class="view active">
-
             <!-- Hero -->
             <section class="hero">
-                <!-- Floating orbs for visual depth -->
                 <div class="hero-floating-orb"></div>
                 <div class="hero-floating-orb"></div>
                 <div class="hero-floating-orb"></div>
 
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    100% Gratuit • Aucune inscription
+                <div class="hero-content">
+                    <div class="hero-badge animate-in">
+                        <span class="badge-dot"></span>
+                        Le déménagement administratif, simplifié.
+                    </div>
+                    <h1 class="animate-in">
+                        Tout gérer d'un coup,<br>
+                        <span class="gradient-text">sans la paperasse.</span>
+                    </h1>
+                    <p class="hero-subtitle animate-in">
+                        Bougeotte génère instantanément tous vos courriers et emails de changement d'adresse.
+                        Sécurisé, sans compte, et 100% gratuit.
+                    </p>
+                    <div class="hero-actions animate-in">
+                        <button class="btn-primary btn-glow" id="cta-start" onclick="navigateTo('form')">
+                            🚀 Commencer maintenant
+                        </button>
+                        <a class="btn-secondary" href="#features">
+                            Découvrir Bougeotte
+                        </a>
+                    </div>
                 </div>
-                <h1>
-                    Changez d'adresse<br>
-                    <span class="gradient-text">en 5 minutes</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Fini les heures perdues à contacter chaque organisme un par un.
-                    Bougeotte génère tous vos courriers et emails de changement d'adresse automatiquement.
-                </p>
-                <div class="hero-actions">
-                    <button class="btn-primary btn-glow" id="cta-start" onclick="navigateTo('form')">
-                        🚀 Générer mes courriers
-                    </button>
-                    <a class="btn-secondary" href="#features">
-                        En savoir plus ↓
-                    </a>
-                </div>
-                <div class="hero-stats">
+
+                <div class="hero-stats animate-in">
                     <div class="hero-stat">
                         <div class="hero-stat-number">50+</div>
-                        <div class="hero-stat-label">Organismes couverts</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">5 min</div>
-                        <div class="hero-stat-label">Temps moyen</div>
+                        <div class="hero-stat-label">Organismes</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">0€</div>
-                        <div class="hero-stat-label">Totalement gratuit</div>
+                        <div class="hero-stat-label">Totalement Gratuit</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">🔒</div>
+                        <div class="hero-stat-label">Données Locales</div>
                     </div>
                 </div>
             </section>
@@ -371,8 +372,44 @@
 
                         <!-- Step 3: Organism selection -->
                         <div class="form-step">
+                            <div class="packs-section">
+                                <h3>⚡ Sélection Rapide</h3>
+                                <p class="step-subtitle">Choisissez un profil pour pré-sélectionner les organismes
+                                    correspondants.</p>
+                                <div class="packs-grid">
+                                    <button type="button" class="pack-card" onclick="applyPack('student')">
+                                        <div class="pack-icon">🎓</div>
+                                        <div class="pack-info">
+                                            <strong>Étudiant</strong>
+                                            <span>CAF, Mutuelle, Mobile...</span>
+                                        </div>
+                                    </button>
+                                    <button type="button" class="pack-card" onclick="applyPack('family')">
+                                        <div class="pack-icon">👨‍👩‍👧‍👦</div>
+                                        <div class="pack-info">
+                                            <strong>Famille</strong>
+                                            <span>Impôts, Énergie, École...</span>
+                                        </div>
+                                    </button>
+                                    <button type="button" class="pack-card" onclick="applyPack('freelance')">
+                                        <div class="pack-icon">💻</div>
+                                        <div class="pack-info">
+                                            <strong>Freelance</strong>
+                                            <span>URSSAF, Banque Pro, Assurances...</span>
+                                        </div>
+                                    </button>
+                                    <button type="button" class="pack-card" onclick="applyPack('owner')">
+                                        <div class="pack-icon">🔑</div>
+                                        <div class="pack-info">
+                                            <strong>Propriétaire</strong>
+                                            <span>Syndic, Taxe Foncière, Eau...</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
                             <div id="categories-container">
-                                <!-- Dynamically populated by JS -->
+                                <!-- Dynamically populated by JS (includes search bar) -->
                             </div>
 
                             <div class="form-nav" style="margin-top: 2rem;">
