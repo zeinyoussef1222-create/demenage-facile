@@ -2156,8 +2156,13 @@ body::before {
     overflow: hidden;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+.ai-chat-window.active {
+    display: flex !important;
     animation: slide-up 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 
 @keyframes slide-up {
     from {

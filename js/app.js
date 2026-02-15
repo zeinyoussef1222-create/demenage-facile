@@ -56,9 +56,9 @@ function clearSavedState() {
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const hadSavedState = loadState();
-    initNavigation();
     initLanding();
     initFormPage();
+
 
     // Restore saved form data if available
     if (hadSavedState && state.userData.prenom) {
@@ -98,7 +98,16 @@ function captureFormData() {
     state.userData.nouvelleAdresse = document.getElementById('nouvelle-adresse')?.value?.trim() || '';
 }
 
+// ── Global Bindings (for HTML onclick) ───────────────────────
+window.navigateTo = window.navigateTo || function (v) { console.warn('Navigation not ready'); };
+window.toggleTheme = window.toggleTheme || function () { console.warn('Theme toggle not ready'); };
+window.toggleMobileMenu = window.toggleMobileMenu || function () { console.warn('Mobile menu not ready'); };
+window.toggleAIChat = window.toggleAIChat || function () { console.warn('AI Chat not ready'); };
+window.nextStep = window.nextStep || function () { console.warn('Form not ready'); };
+window.prevStep = window.prevStep || function () { console.warn('Form not ready'); };
+
 function restoreFormData() {
+
     const d = state.userData;
     const setVal = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
     setVal('prenom', d.prenom);
@@ -121,31 +130,35 @@ function restoreFormData() {
 }
 
 // ── Navigation ──────────────────────────────────────────────
-function initNavigation() {
+window.navigateTo = function (viewName) {
     const views = ['landing', 'form', 'results'];
-
-    window.navigateTo = function (viewName) {
-        views.forEach(v => {
-            const el = document.getElementById(`view-${v}`);
-            if (el) {
-                el.classList.toggle('active', v === viewName);
-            }
-        });
-        state.currentView = viewName;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Update nav state
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.toggle('active', link.dataset.view === viewName);
-        });
-
-        // Show/hide nav based on view
-        const nav = document.getElementById('main-nav');
-        if (nav) {
-            nav.classList.toggle('nav-dark', viewName !== 'landing');
+    views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) {
+            el.classList.toggle('active', v === viewName);
         }
-    };
-}
+    });
+
+    state.currentView = viewName;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update nav state
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.view === viewName);
+    });
+
+    // Update logo color for visibility
+    const nav = document.getElementById('main-nav');
+    if (nav) {
+        nav.classList.toggle('nav-dark', viewName !== 'landing');
+    }
+
+    // Close mobile menu if open
+    document.getElementById('nav-links')?.classList.remove('mobile-open');
+    document.getElementById('hamburger')?.classList.remove('active');
+    document.body.style.overflow = '';
+};
+
 
 // ── Shared IntersectionObserver ──────────────────────────────
 const scrollObserver = new IntersectionObserver((entries) => {
@@ -721,12 +734,13 @@ function updateProgress() {
     const sent = Object.values(state.tracker).filter(s => s === 'sent').length;
     const progress = total > 0 ? Math.round(((completed + sent * 0.5) / total) * 100) : 0;
 
-    const fill = document.getElementById('progress-fill');
+    const fill = document.getElementById('results-progress-fill') || document.getElementById('progress-fill');
     if (fill) fill.style.width = `${progress}%`;
 
     const percent = document.getElementById('completion-percent');
     if (percent) percent.textContent = `${progress}%`;
 }
+
 
 // ── Modal ────────────────────────────────────────────────────
 function showModal(doc) {
