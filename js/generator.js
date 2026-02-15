@@ -1,5 +1,5 @@
-// ============================================================
-// DéménageFacile — Moteur de génération de courriers & emails
+﻿// ============================================================
+// Bougeotte — Moteur de génération de courriers & emails
 // ============================================================
 
 import { getCategorieById } from './data.js';

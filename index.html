@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DéménageFacile — Changez d'adresse en 5 minutes</title>
+    <title>Bougeotte — Changez d'adresse en 5 minutes</title>
     <meta name="description"
         content="Générez automatiquement tous vos courriers et emails de changement d'adresse pour votre déménagement. 50+ organismes couverts.">
-    <meta property="og:title" content="DéménageFacile — Changez d'adresse en 5 minutes">
+    <meta property="og:title" content="Bougeotte — Changez d'adresse en 5 minutes">
     <meta property="og:description"
-        content="Fini les heures perdues à prévenir chaque organisme. DéménageFacile génère tous vos courriers en un clic.">
+        content="Fini les heures perdues à prévenir chaque organisme. Bougeotte génère tous vos courriers en un clic.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DéménageFacile — Changez d'adresse en 5 minutes">
+    <meta name="twitter:title" content="Bougeotte — Changez d'adresse en 5 minutes">
     <meta name="twitter:description"
         content="Générez tous vos courriers de changement d'adresse en un clic. 50+ organismes couverts.">
-    <link rel="canonical" href="https://demenagefacile.fr">
+    <link rel="canonical" href="https://Bougeotte.fr">
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -44,15 +44,28 @@
         <nav class="navbar" id="main-nav">
             <a href="#" class="nav-brand" onclick="navigateTo('landing'); return false;">
                 <span class="nav-logo">🏠</span>
-                <span class="nav-brand-text">DéménageFacile</span>
+                <span class="nav-brand-text">Bougeotte</span>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><button class="nav-link active" data-view="landing" onclick="navigateTo('landing')">Accueil</button>
                 </li>
                 <li><button class="nav-link" data-view="form" onclick="navigateTo('form')">Commencer</button></li>
             </ul>
-            <button class="nav-cta" onclick="navigateTo('form')">🚀 Commencer</button>
+            <div class="nav-right">
+                <button class="btn-theme-toggle" id="btn-theme" onclick="toggleTheme()" title="Changer de thème"
+                    aria-label="Basculer mode clair/sombre">
+                    <span id="theme-icon">☀️</span>
+                </button>
+                <button class="nav-cta" onclick="navigateTo('form')">🚀 Commencer</button>
+                <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu"
+                    aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </nav>
+
+        <!-- Toast container -->
+        <div id="toast-container" class="toast-container"></div>
 
         <!-- ═══════════════════════════════════════════════════════ -->
         <!-- VIEW: LANDING PAGE                                      -->
@@ -61,6 +74,11 @@
 
             <!-- Hero -->
             <section class="hero">
+                <!-- Floating orbs for visual depth -->
+                <div class="hero-floating-orb"></div>
+                <div class="hero-floating-orb"></div>
+                <div class="hero-floating-orb"></div>
+
                 <div class="hero-badge">
                     <span class="badge-dot"></span>
                     100% Gratuit • Aucune inscription
@@ -71,7 +89,7 @@
                 </h1>
                 <p class="hero-subtitle">
                     Fini les heures perdues à contacter chaque organisme un par un.
-                    DéménageFacile génère tous vos courriers et emails de changement d'adresse automatiquement.
+                    Bougeotte génère tous vos courriers et emails de changement d'adresse automatiquement.
                 </p>
                 <div class="hero-actions">
                     <button class="btn-primary btn-glow" id="cta-start" onclick="navigateTo('form')">
@@ -97,10 +115,38 @@
                 </div>
             </section>
 
+            <!-- Trust / Social Proof -->
+            <section class="trust-section">
+                <p>Ils simplifient leur déménagement avec Bougeotte</p>
+                <div class="trust-marquee">
+                    <div class="trust-item"><span>🏦</span> BNP Paribas</div>
+                    <div class="trust-item"><span>⚡</span> EDF</div>
+                    <div class="trust-item"><span>📱</span> Orange</div>
+                    <div class="trust-item"><span>🏛️</span> Impôts</div>
+                    <div class="trust-item"><span>🏥</span> CPAM</div>
+                    <div class="trust-item"><span>🚗</span> Carte Grise</div>
+                    <div class="trust-item"><span>🏠</span> CAF</div>
+                    <div class="trust-item"><span>💧</span> Veolia</div>
+                    <div class="trust-item"><span>📺</span> Free</div>
+                    <div class="trust-item"><span>🛡️</span> AXA</div>
+                    <!-- Duplicated for seamless loop -->
+                    <div class="trust-item"><span>🏦</span> BNP Paribas</div>
+                    <div class="trust-item"><span>⚡</span> EDF</div>
+                    <div class="trust-item"><span>📱</span> Orange</div>
+                    <div class="trust-item"><span>🏛️</span> Impôts</div>
+                    <div class="trust-item"><span>🏥</span> CPAM</div>
+                    <div class="trust-item"><span>🚗</span> Carte Grise</div>
+                    <div class="trust-item"><span>🏠</span> CAF</div>
+                    <div class="trust-item"><span>💧</span> Veolia</div>
+                    <div class="trust-item"><span>📺</span> Free</div>
+                    <div class="trust-item"><span>🛡️</span> AXA</div>
+                </div>
+            </section>
+
             <!-- Features -->
             <section class="section" id="features">
                 <div class="section-title">
-                    <h2>Pourquoi DéménageFacile ?</h2>
+                    <h2>Pourquoi Bougeotte ?</h2>
                     <p>Tout ce dont vous avez besoin pour un déménagement administratif sans stress.</p>
                 </div>
                 <div class="features-grid">
@@ -200,7 +246,7 @@
 
             <!-- Footer -->
             <footer class="footer">
-                <p>🏠 DéménageFacile — Fait avec ❤️ pour simplifier votre déménagement</p>
+                <p>🏠 Bougeotte — Fait avec ❤️ pour simplifier votre déménagement</p>
                 <p style="margin-top: 0.5rem;">Vos données restent sur votre navigateur. Aucune donnée n'est envoyée à
                     un serveur.</p>
             </footer>

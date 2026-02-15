@@ -1,5 +1,5 @@
-// ============================================================
-// DéménageFacile — Main Application Controller
+﻿// ============================================================
+// Bougeotte — Main Application Controller
 // ============================================================
 
 import { CATEGORIES, ORGANISMES, getOrganismesByCategorie, getPopulaires, getOrganismeById, getCategorieById } from './data.js';
@@ -7,6 +7,8 @@ import { genererTousDocuments, genererMailtoLink } from './generator.js';
 import { telechargerPDF, telechargerPDFCombine } from './pdf.js';
 
 // ── State ──────────────────────────────────────────────────
+const STORAGE_KEY = 'Bougeotte_state';
+
 const state = {
     currentView: 'landing',
     userData: {
@@ -22,11 +24,54 @@ const state = {
     tracker: {}, // { orgId: 'pending' | 'sent' | 'completed' }
 };
 
+// ── Persistence ─────────────────────────────────────────────
+function saveState() {
+    try {
+        const toSave = {
+            userData: state.userData,
+            selectedOrganismes: Array.from(state.selectedOrganismes),
+            tracker: state.tracker,
+            currentView: state.currentView,
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    } catch (e) { /* quota exceeded or private mode */ }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return false;
+        const parsed = JSON.parse(saved);
+        if (parsed.userData) state.userData = parsed.userData;
+        if (parsed.selectedOrganismes) state.selectedOrganismes = new Set(parsed.selectedOrganismes);
+        if (parsed.tracker) state.tracker = parsed.tracker;
+        return true;
+    } catch (e) { return false; }
+}
+
+function clearSavedState() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    const hadSavedState = loadState();
     initNavigation();
     initLanding();
     initFormPage();
+
+    // Restore saved form data if available
+    if (hadSavedState && state.userData.prenom) {
+        restoreFormData();
+    }
+
+    // Auto-save form inputs on change
+    document.querySelectorAll('#demenagement-form input, #demenagement-form textarea').forEach(field => {
+        field.addEventListener('input', () => {
+            captureFormData();
+            saveState();
+        });
+    });
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -37,6 +82,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function captureFormData() {
+    state.userData.prenom = document.getElementById('prenom')?.value?.trim() || '';
+    state.userData.nom = document.getElementById('nom-famille')?.value?.trim() || '';
+    state.userData.ville = document.getElementById('ville-actuelle')?.value?.trim() || '';
+    state.userData.dateDemenagement = document.getElementById('date-demenagement')?.value || '';
+    state.userData.ancienneAdresse = document.getElementById('ancienne-adresse')?.value?.trim() || '';
+    state.userData.nouvelleAdresse = document.getElementById('nouvelle-adresse')?.value?.trim() || '';
+}
+
+function restoreFormData() {
+    const d = state.userData;
+    const setVal = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+    setVal('prenom', d.prenom);
+    setVal('nom-famille', d.nom);
+    setVal('ville-actuelle', d.ville);
+    setVal('date-demenagement', d.dateDemenagement);
+    setVal('ancienne-adresse', d.ancienneAdresse);
+    setVal('nouvelle-adresse', d.nouvelleAdresse);
+
+    // Restore selected organisms
+    if (state.selectedOrganismes.size > 0) {
+        document.querySelectorAll('.org-checkbox').forEach(cb => {
+            if (state.selectedOrganismes.has(cb.value)) {
+                cb.checked = true;
+                cb.closest('.organism-card')?.classList.add('selected');
+            }
+        });
+        updateCounter();
+    }
+}
 
 // ── Navigation ──────────────────────────────────────────────
 function initNavigation() {
@@ -160,6 +236,9 @@ function renderCategories() {
     // Observe dynamically-added elements for scroll animation
     observeNewElements(container);
 
+    // Init search filter for organisms
+    initSearchFilter();
+
     // Event listeners for checkboxes
     container.querySelectorAll('.org-checkbox').forEach(cb => {
         cb.addEventListener('change', () => {
@@ -170,6 +249,7 @@ function renderCategories() {
             }
             updateCounter();
             cb.closest('.organism-card').classList.toggle('selected', cb.checked);
+            saveState();
         });
     });
 
@@ -402,6 +482,7 @@ function renderResults() {
         state.selectedOrganismes.clear();
         state.documents = [];
         state.tracker = {};
+        clearSavedState();
         navigateTo('form');
         // Reset form
         document.getElementById('demenagement-form')?.reset();
@@ -542,6 +623,7 @@ function initDocumentCardListeners() {
 
             // Toggle: if already this status, revert to pending
             state.tracker[id] = currentStatus === newStatus ? 'pending' : newStatus;
+            saveState();
 
             // Update UI
             updateDocumentStatus(id);

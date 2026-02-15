@@ -1,6 +1,6 @@
-{
-    "name": "DéménageFacile",
-    "short_name": "DéménageFacile",
+﻿{
+    "name": "Bougeotte",
+    "short_name": "Bougeotte",
     "description": "Changez d'adresse auprès de 50+ organismes en un clic. Courriers et emails générés automatiquement.",
     "start_url": "/",
     "display": "standalone",

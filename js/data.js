@@ -1,5 +1,5 @@
-// ============================================================
-// DéménageFacile — Base de données des organismes français
+﻿// ============================================================
+// Bougeotte — Base de données des organismes français
 // ============================================================
 
 export const CATEGORIES = [

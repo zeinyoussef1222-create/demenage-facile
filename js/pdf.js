@@ -1,5 +1,5 @@
-// ============================================================
-// DéménageFacile — PDF Generation Module
+﻿// ============================================================
+// Bougeotte — PDF Generation Module
 // Uses jsPDF (loaded via CDN in index.html)
 // ============================================================
 
@@ -107,7 +107,7 @@ export function genererPDF(courrier, organisme, userData) {
     const footerY = 285;
     doc.setFontSize(7);
     doc.setTextColor(180, 180, 180);
-    doc.text('Document généré par DéménageFacile — demenagefacile.fr', pageWidth / 2, footerY, { align: 'center' });
+    doc.text('Document généré par Bougeotte — Bougeotte.fr', pageWidth / 2, footerY, { align: 'center' });
 
     // — Bottom accent bar —
     doc.setFillColor(99, 102, 241);
@@ -203,10 +203,10 @@ export function telechargerPDFCombine(documents, userData) {
         // Footer
         doc.setFontSize(7);
         doc.setTextColor(180, 180, 180);
-        doc.text('DéménageFacile — demenagefacile.fr', pageWidth / 2, 285, { align: 'center' });
+        doc.text('Bougeotte — Bougeotte.fr', pageWidth / 2, 285, { align: 'center' });
         doc.setFillColor(99, 102, 241);
         doc.rect(0, 293, 210, 4, 'F');
     });
 
-    doc.save('demenagefacile_tous_courriers.pdf');
+    doc.save('Bougeotte_tous_courriers.pdf');
 }
