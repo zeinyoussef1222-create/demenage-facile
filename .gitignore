@@ -1,0 +1,13 @@
+# DéménageFacile
+node_modules/
+.env
+.env.local
+*.key
+*.pem
+*.log
+dist/
+build/
+.cache/
+.DS_Store
+Thumbs.db
+_audit.py

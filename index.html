@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DéménageFacile — Changez d'adresse en 5 minutes</title>
+    <meta name="description"
+        content="Générez automatiquement tous vos courriers et emails de changement d'adresse pour votre déménagement. 50+ organismes couverts.">
+    <meta property="og:title" content="DéménageFacile — Changez d'adresse en 5 minutes">
+    <meta property="og:description"
+        content="Fini les heures perdues à prévenir chaque organisme. DéménageFacile génère tous vos courriers en un clic.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DéménageFacile — Changez d'adresse en 5 minutes">
+    <meta name="twitter:description"
+        content="Générez tous vos courriers de changement d'adresse en un clic. 50+ organismes couverts.">
+    <link rel="canonical" href="https://demenagefacile.fr">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"
+        integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/"
+        crossorigin="anonymous"></script>
+
+    <!-- Favicon (emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+</head>
+
+<body>
+    <main>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- NAVIGATION                                              -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <nav class="navbar" id="main-nav">
+            <a href="#" class="nav-brand" onclick="navigateTo('landing'); return false;">
+                <span class="nav-logo">🏠</span>
+                <span class="nav-brand-text">DéménageFacile</span>
+            </a>
+            <ul class="nav-links">
+                <li><button class="nav-link active" data-view="landing" onclick="navigateTo('landing')">Accueil</button>
+                </li>
+                <li><button class="nav-link" data-view="form" onclick="navigateTo('form')">Commencer</button></li>
+            </ul>
+            <button class="nav-cta" onclick="navigateTo('form')">🚀 Commencer</button>
+        </nav>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- VIEW: LANDING PAGE                                      -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div id="view-landing" class="view active">
+
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    100% Gratuit • Aucune inscription
+                </div>
+                <h1>
+                    Changez d'adresse<br>
+                    <span class="gradient-text">en 5 minutes</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Fini les heures perdues à contacter chaque organisme un par un.
+                    DéménageFacile génère tous vos courriers et emails de changement d'adresse automatiquement.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary btn-glow" id="cta-start" onclick="navigateTo('form')">
+                        🚀 Générer mes courriers
+                    </button>
+                    <a class="btn-secondary" href="#features">
+                        En savoir plus ↓
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">50+</div>
+                        <div class="hero-stat-label">Organismes couverts</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">5 min</div>
+                        <div class="hero-stat-label">Temps moyen</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">0€</div>
+                        <div class="hero-stat-label">Totalement gratuit</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="section" id="features">
+                <div class="section-title">
+                    <h2>Pourquoi DéménageFacile ?</h2>
+                    <p>Tout ce dont vous avez besoin pour un déménagement administratif sans stress.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Ultra rapide</h3>
+                        <p>Remplissez vos informations une seule fois. On génère tout pour vous en quelques secondes.
+                        </p>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">📄</div>
+                        <h3>PDF prêts à imprimer</h3>
+                        <p>Courriers formatés professionnellement, prêts à être imprimés et envoyés par La Poste.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">📧</div>
+                        <h3>Emails pré-rédigés</h3>
+                        <p>Un clic pour ouvrir l'email pré-rempli dans votre messagerie. Plus qu'à appuyer sur
+                            "Envoyer".</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">📊</div>
+                        <h3>Suivi d'avancement</h3>
+                        <p>Suivez quels organismes ont été prévenus grâce à notre checklist interactive.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>50+ organismes</h3>
+                        <p>Banques, assurances, énergie, télécom, administration... On couvre tous les cas.</p>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% privé</h3>
+                        <p>Vos données ne quittent jamais votre navigateur. Aucun serveur, aucune inscription.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How it works -->
+            <section class="section" id="how-it-works">
+                <div class="section-title">
+                    <h2>Comment ça marche ?</h2>
+                    <p>3 étapes simples pour en finir avec la paperasse du déménagement.</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item animate-on-scroll">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Entrez vos informations</h3>
+                            <p>Votre nom, ancienne et nouvelle adresse, date de déménagement. C'est tout.</p>
+                        </div>
+                    </div>
+                    <div class="step-item animate-on-scroll">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Sélectionnez vos organismes</h3>
+                            <p>Cochez les organismes à prévenir dans notre liste complète, ou utilisez la sélection
+                                rapide.</p>
+                        </div>
+                    </div>
+                    <div class="step-item animate-on-scroll">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Téléchargez et envoyez</h3>
+                            <p>Récupérez vos courriers en PDF et envoyez les emails en un clic. Suivez votre avancement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing -->
+            <section class="section" id="pricing">
+                <div class="section-title">
+                    <h2>Tarif transparent</h2>
+                    <p>Pas de surprise, pas de frais cachés.</p>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <div class="pricing-badge">🎉 Lancement</div>
+                    <div class="pricing-price">Gratuit <span>/ pour toujours</span></div>
+                    <p class="pricing-subtitle">Pendant notre phase de lancement</p>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> 50+ organismes couverts</li>
+                        <li><span class="check">✓</span> Génération illimitée de courriers</li>
+                        <li><span class="check">✓</span> Export PDF individuel et groupé</li>
+                        <li><span class="check">✓</span> Emails pré-rédigés en 1 clic</li>
+                        <li><span class="check">✓</span> Suivi d'avancement interactif</li>
+                        <li><span class="check">✓</span> 100% privé — données locales</li>
+                        <li><span class="check">✓</span> Aucune inscription requise</li>
+                    </ul>
+                    <button class="btn-primary btn-glow" onclick="navigateTo('form')"
+                        style="width: 100%; justify-content: center;">
+                        🚀 Commencer maintenant
+                    </button>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>🏠 DéménageFacile — Fait avec ❤️ pour simplifier votre déménagement</p>
+                <p style="margin-top: 0.5rem;">Vos données restent sur votre navigateur. Aucune donnée n'est envoyée à
+                    un serveur.</p>
+            </footer>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- VIEW: FORM PAGE                                         -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div id="view-form" class="view">
+            <div class="form-page">
+
+                <div class="form-page-header">
+                    <h2>🏠 Préparez votre déménagement</h2>
+                    <p>Remplissez vos informations puis sélectionnez les organismes à prévenir.</p>
+                </div>
+
+                <!-- Step indicators -->
+                <div class="steps-indicator">
+                    <div class="step-indicator active">
+                        <div class="step-dot">1</div>
+                        <div class="step-label">Identité</div>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="step-dot">2</div>
+                        <div class="step-label">Adresses</div>
+                    </div>
+                    <div class="step-indicator">
+                        <div class="step-dot">3</div>
+                        <div class="step-label">Organismes</div>
+                    </div>
+                </div>
+
+                <div id="form-container">
+                    <form id="demenagement-form" onsubmit="return false;">
+
+                        <!-- Step 1: Identity -->
+                        <div class="form-step active">
+                            <div class="step-error">⚠️ Veuillez remplir tous les champs obligatoires.</div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="prenom">Prénom *</label>
+                                    <input type="text" id="prenom" name="prenom" placeholder="Jean" required
+                                        autocomplete="given-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom-famille">Nom *</label>
+                                    <input type="text" id="nom-famille" name="nom" placeholder="Dupont" required
+                                        autocomplete="family-name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ville-actuelle">Ville actuelle *</label>
+                                <input type="text" id="ville-actuelle" name="ville" placeholder="Paris" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date-demenagement">Date de déménagement *</label>
+                                <input type="date" id="date-demenagement" name="date" required>
+                            </div>
+
+                            <div class="form-nav">
+                                <div></div>
+                                <button type="button" class="btn-primary" onclick="nextStep()">
+                                    Suivant →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Addresses -->
+                        <div class="form-step">
+                            <div class="step-error">⚠️ Veuillez remplir toutes les adresses.</div>
+
+                            <div class="form-group">
+                                <label for="ancienne-adresse">Ancienne adresse complète *</label>
+                                <textarea id="ancienne-adresse" name="ancienne-adresse"
+                                    placeholder="12 rue de la Paix&#10;75002 Paris" required rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nouvelle-adresse">Nouvelle adresse complète *</label>
+                                <textarea id="nouvelle-adresse" name="nouvelle-adresse"
+                                    placeholder="45 avenue des Champs-Élysées&#10;75008 Paris" required
+                                    rows="3"></textarea>
+                            </div>
+
+                            <div class="form-nav">
+                                <button type="button" class="btn-secondary" onclick="prevStep()">
+                                    ← Retour
+                                </button>
+                                <button type="button" class="btn-primary" onclick="nextStep()">
+                                    Suivant →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Organism selection -->
+                        <div class="form-step">
+                            <div id="categories-container">
+                                <!-- Dynamically populated by JS -->
+                            </div>
+
+                            <div class="form-nav" style="margin-top: 2rem;">
+                                <button type="button" class="btn-secondary" onclick="prevStep()">
+                                    ← Retour
+                                </button>
+                                <button type="button" class="btn-primary btn-glow" id="btn-generate" disabled>
+                                    ✨ Générer mes documents
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- VIEW: RESULTS PAGE                                      -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div id="view-results" class="view">
+            <div class="results-page">
+                <div id="results-container">
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- App Script (ES Module) -->
+    </main>
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>
