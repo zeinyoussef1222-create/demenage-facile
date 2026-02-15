@@ -81,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(() => console.log('Service Worker Registered'))
+            .catch(err => console.error('SW Registration Failed', err));
+    }
 });
 
 function captureFormData() {
@@ -415,6 +421,16 @@ function generateDocuments() {
     // Navigate to results
     renderResults();
     navigateTo('results');
+
+    // Celebration confetti!
+    if (window.confetti) {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#6366f1', '#a78bfa', '#06b6d4']
+        });
+    }
 }
 
 // ── Results Page ────────────────────────────────────────────
@@ -751,3 +767,235 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
+// ── Toast Notifications ─────────────────────────────────────
+function showToast(message, type = 'info', duration = 3000) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ── Mobile Menu ─────────────────────────────────────────────
+window.toggleMobileMenu = function () {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    if (!hamburger || !navLinks) return;
+
+    const isOpen = navLinks.classList.toggle('mobile-open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    // Close menu on link click
+    if (isOpen) {
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }, { once: true });
+        });
+    }
+};
+
+// ── Theme Toggle ────────────────────────────────────────────
+function initTheme() {
+    const saved = localStorage.getItem('bougeotte_theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? 'dark' : 'dark'); // default dark
+    applyTheme(theme);
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('bougeotte_theme', theme);
+}
+
+window.toggleTheme = function () {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+};
+
+// Init theme on load
+initTheme();
+
+// ── Address Autocomplete (API adresse.data.gouv.fr) ─────────
+function initAddressAutocomplete() {
+    const fields = ['ancienne-adresse', 'nouvelle-adresse'];
+    fields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (!input) return;
+
+        let debounceTimer = null;
+        input.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            const query = input.value.trim();
+            if (query.length < 3) {
+                removeDropdown(input);
+                return;
+            }
+            debounceTimer = setTimeout(() => fetchAddresses(query, input), 300);
+        });
+
+        input.addEventListener('blur', () => {
+            setTimeout(() => removeDropdown(input), 200);
+        });
+    });
+}
+
+async function fetchAddresses(query, input) {
+    try {
+        const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`);
+        const data = await res.json();
+        if (data.features && data.features.length > 0) {
+            showAddressDropdown(data.features, input);
+        } else {
+            removeDropdown(input);
+        }
+    } catch (e) {
+        removeDropdown(input);
+    }
+}
+
+function showAddressDropdown(features, input) {
+    removeDropdown(input);
+    const dropdown = document.createElement('div');
+    dropdown.className = 'autocomplete-dropdown';
+    dropdown.id = `dropdown-${input.id}`;
+
+    features.forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'autocomplete-item';
+        item.innerHTML = `
+            <div class="autocomplete-label">${f.properties.label}</div>
+            <div class="autocomplete-context">${f.properties.context}</div>
+        `;
+        item.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            input.value = f.properties.label;
+            removeDropdown(input);
+            // Auto-fill ville if applicable
+            const villeInput = document.getElementById('ville-actuelle');
+            if (villeInput && input.id === 'nouvelle-adresse') {
+                villeInput.value = f.properties.city || '';
+            }
+            captureFormData();
+            saveState();
+        });
+        dropdown.appendChild(item);
+    });
+
+    input.parentElement.style.position = 'relative';
+    input.parentElement.appendChild(dropdown);
+}
+
+function removeDropdown(input) {
+    const existing = document.getElementById(`dropdown-${input.id}`);
+    if (existing) existing.remove();
+}
+
+// ── Search / Filter Organisms ───────────────────────────────
+function initSearchFilter() {
+    const container = document.getElementById('categories-container');
+    if (!container) return;
+
+    // Check if already exists
+    if (container.querySelector('.search-wrapper')) return;
+
+    const searchWrapper = document.createElement('div');
+    searchWrapper.className = 'search-wrapper';
+    searchWrapper.innerHTML = `<input type="text" class="search-bar" id="search-organisms" placeholder="Rechercher un organisme (ex: EDF, BNP, Orange...)">`;
+    container.insertBefore(searchWrapper, container.firstChild);
+
+    const searchInput = document.getElementById('search-organisms');
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        container.querySelectorAll('.organism-card').forEach(card => {
+            const name = card.querySelector('.org-name')?.textContent.toLowerCase() || '';
+            card.style.display = name.includes(query) || query === '' ? '' : 'none';
+        });
+
+        // Hide empty categories
+        container.querySelectorAll('.category-section').forEach(section => {
+            const visible = section.querySelectorAll('.organism-card:not([style*="display: none"])');
+            section.style.display = visible.length > 0 || query === '' ? '' : 'none';
+        });
+    });
+}
+
+// Init some features after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    initAddressAutocomplete();
+});
+
+
+// ── AI Assistant Logic ──────────────────────────────────────
+window.toggleAIChat = function () {
+    const win = document.getElementById('ai-chat-window');
+    if (!win) return;
+    const isActive = win.classList.toggle('active');
+    if (isActive) {
+        document.getElementById('ai-chat-input')?.focus();
+    }
+};
+
+window.handleAIChatKey = function (e) {
+    if (e.key === 'Enter') sendAIMessage();
+};
+
+window.sendAIMessage = function () {
+    const input = document.getElementById('ai-chat-input');
+    const container = document.getElementById('ai-chat-messages');
+    if (!input || !container || !input.value.trim()) return;
+
+    const userText = input.value.trim();
+    input.value = '';
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.textContent = userText;
+    container.appendChild(userMsg);
+    container.scrollTop = container.scrollHeight;
+
+    // Simulate AI thinking
+    setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'message ai';
+        aiMsg.innerHTML = '<span class="typing-dots">...</span>';
+        container.appendChild(aiMsg);
+        container.scrollTop = container.scrollHeight;
+
+        setTimeout(() => {
+            const response = getAIResponse(userText);
+            aiMsg.textContent = response;
+            container.scrollTop = container.scrollHeight;
+        }, 1200);
+    }, 400);
+};
+
+function getAIResponse(query) {
+    const lower = query.toLowerCase();
+    if (lower.includes('caf')) return "Pour la CAF, vous devez déclarer votre changement de situation dans les 30 jours. Bougeotte peut vous générer le courrier recommandé nécessaire si vous le souhaitez !";
+    if (lower.includes('impôt') || lower.includes('fisc')) return "Les impôts doivent être prévenus via votre espace particulier sur impot.gouv.fr. Notre guide dédié vous explique la marche à suivre étape par étape.";
+    if (lower.includes('edf') || lower.includes('électricité')) return "Pour l'électricité, pensez à résilier votre contrat actuel 1 semaine avant, et à en souscrire un nouveau pour votre futur logement !";
+    if (lower.includes('délais') || lower.includes('quand')) return "Le plus tôt est le mieux ! Idéalement, commencez les démarches 1 mois avant le jour J. Bougeotte vous aide à ne rien oublier.";
+    if (lower.includes('gratuit')) return "Oui, Bougeotte est 100% gratuit et vos données restent anonymes dans votre navigateur.";
+    if (lower.includes('merci')) return "Je vous en prie ! N'hésitez pas si vous avez d'autres questions sur votre déménagement. 😊";
+
+    return "Je comprends votre question sur '" + query + "'. En tant qu'assistant Bougeotte, je vous recommande d'utiliser notre formulaire multi-étape pour générer tous vos documents de déménagement automatiquement !";
+}
+

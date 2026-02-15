@@ -25,10 +25,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- jsPDF for PDF generation -->
-    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"
-        integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/"
-        crossorigin="anonymous"></script>
+    <!-- External libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
     <!-- Favicon (emoji) -->
     <link rel="icon"
@@ -218,29 +217,55 @@
                 </div>
             </section>
 
-            <!-- Pricing -->
-            <section class="section" id="pricing">
+            <!-- Pricing / Launch -->
+            <section class="section section-dark" id="pricing">
                 <div class="section-title">
-                    <h2>Tarif transparent</h2>
-                    <p>Pas de surprise, pas de frais cachés.</p>
+                    <h2>Un outil gratuit pour tous</h2>
+                    <p class="pricing-subtitle">Pendant notre phase de lancement, accédez à toutes les fonctionnalités
+                        gratuitement.</p>
                 </div>
                 <div class="pricing-card animate-on-scroll">
-                    <div class="pricing-badge">🎉 Lancement</div>
-                    <div class="pricing-price">Gratuit <span>/ pour toujours</span></div>
-                    <p class="pricing-subtitle">Pendant notre phase de lancement</p>
+                    <div class="pricing-price">0€</div>
                     <ul class="pricing-features">
-                        <li><span class="check">✓</span> 50+ organismes couverts</li>
-                        <li><span class="check">✓</span> Génération illimitée de courriers</li>
-                        <li><span class="check">✓</span> Export PDF individuel et groupé</li>
-                        <li><span class="check">✓</span> Emails pré-rédigés en 1 clic</li>
-                        <li><span class="check">✓</span> Suivi d'avancement interactif</li>
-                        <li><span class="check">✓</span> 100% privé — données locales</li>
-                        <li><span class="check">✓</span> Aucune inscription requise</li>
+                        <li>✓ 50+ organismes couverts</li>
+                        <li>✓ Génération illimitée de courriers</li>
+                        <li>✓ Export PDF individuel et groupé</li>
+                        <li>✓ Emails pré-rédigés en 1 clic</li>
+                        <li>✓ Suivi d'avancement interactif</li>
+                        <li>✓ 100% privé — données locales</li>
+                        <li>✓ Aucune inscription requise</li>
                     </ul>
-                    <button class="btn-primary btn-glow" onclick="navigateTo('form')"
-                        style="width: 100%; justify-content: center;">
-                        🚀 Commencer maintenant
-                    </button>
+                    <button class="btn-primary" onclick="navigateTo('form')">🚀 Profiter maintenant</button>
+                </div>
+            </section>
+
+            <!-- Guides & SEO -->
+            <section class="section" id="guides">
+                <div class="section-title">
+                    <h2>Nos guides pratiques</h2>
+                    <p>Tout savoir sur les démarches administratives de votre déménagement.</p>
+                </div>
+                <div class="guides-grid">
+                    <a href="/guide/banque" class="guide-card animate-on-scroll">
+                        <div class="guide-icon">🏦</div>
+                        <h4>Le changement d'adresse bancaire</h4>
+                        <p>Délais, procédures et modèles de lettres pour votre banque.</p>
+                    </a>
+                    <a href="/guide/impots" class="guide-card animate-on-scroll">
+                        <div class="guide-icon">🏛️</div>
+                        <h4>Prévenir les impôts</h4>
+                        <p>Comment déclarer votre nouvelle adresse aux services fiscaux.</p>
+                    </a>
+                    <a href="/guide/caf" class="guide-card animate-on-scroll">
+                        <div class="guide-icon">🏠</div>
+                        <h4>CAF et déménagement</h4>
+                        <p>Transférez votre dossier et mettez à jour vos aides au logement.</p>
+                    </a>
+                    <a href="/guide/carte-grise" class="guide-card animate-on-scroll">
+                        <div class="guide-icon">🚗</div>
+                        <h4>Carte Grise (ANTS)</h4>
+                        <p>La procédure obligatoire pour mettre à jour votre certificat d'immatriculation.</p>
+                    </a>
                 </div>
             </section>
 
@@ -365,6 +390,33 @@
             </div>
         </div>
 
+        <!-- ── AI Assistant UI ────────────────────────────────────── -->
+        <button class="ai-fab" id="ai-fab" onclick="toggleAIChat()" title="Aide intelligente Bougeotte">
+            <span class="ai-icon">🤖</span>
+            <span class="ai-badge">IA</span>
+        </button>
+
+        <div class="ai-chat-window" id="ai-chat-window">
+            <div class="ai-chat-header">
+                <div class="ai-chat-title">
+                    <span class="ai-status"></span>
+                    Assistant Bougeotte
+                </div>
+                <button class="ai-chat-close" onclick="toggleAIChat()">&times;</button>
+            </div>
+            <div class="ai-chat-messages" id="ai-chat-messages">
+                <div class="message ai">
+                    Bonjour ! Je suis l'assistant Bougeotte. Comment puis-je vous aider dans votre déménagement
+                    aujourd'hui ?
+                </div>
+            </div>
+            <div class="ai-chat-input-area">
+                <input type="text" id="ai-chat-input" placeholder="Posez votre question..."
+                    onkeypress="handleAIChatKey(event)">
+                <button id="ai-chat-send" onclick="sendAIMessage()"><span>➤</span></button>
+            </div>
+        </div>
+
         <!-- ═══════════════════════════════════════════════════════ -->
         <!-- VIEW: RESULTS PAGE                                      -->
         <!-- ═══════════════════════════════════════════════════════ -->
@@ -378,8 +430,9 @@
 
         <!-- App Script (ES Module) -->
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script type="module" src="js/app.js"></script>
-
 </body>
 
 </html>
