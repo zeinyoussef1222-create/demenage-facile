@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changer d'adresse à sa banque lors d'un déménagement — Guide complet | DéménageFacile</title>
+    <meta name="description"
+        content="Comment prévenir votre banque (BNP, Société Générale, Crédit Agricole, LCL, Boursorama) de votre changement d'adresse lors d'un déménagement. Modèles de courriers gratuits.">
+    <meta property="og:title" content="Changer d'adresse à sa banque — Guide DéménageFacile">
+    <meta property="og:description"
+        content="Courriers et emails pré-rédigés pour prévenir votre banque de votre déménagement. BNP, SG, CA, Boursorama et plus.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://demenage-facile.vercel.app/guide/banque">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .nav {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2e8f0, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #f8fafc;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+            color: #c7d2fe;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        ul,
+        ol {
+            margin: 0.5rem 0 1.5rem 1.5rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .highlight {
+            background: rgba(99, 102, 241, 0.15);
+            border-left: 4px solid #6366f1;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        strong {
+            color: #f8fafc;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-box h2 {
+            margin-top: 0;
+        }
+
+        .cta-box .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .article {
+                padding: 2rem 1rem 3rem;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Changer d'adresse à sa banque lors d'un déménagement",
+    "description": "Guide complet pour prévenir votre banque de votre changement d'adresse : BNP Paribas, Société Générale, Crédit Agricole, LCL, Boursorama.",
+    "author": { "@type": "Organization", "name": "DéménageFacile" },
+    "datePublished": "2026-02-15",
+    "publisher": { "@type": "Organization", "name": "DéménageFacile" }
+  }
+  </script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a class="nav-brand" href="/">🏠 DéménageFacile</a>
+        <a class="nav-cta" href="/">🚀 Générer mes courriers</a>
+    </nav>
+
+    <article class="article">
+        <div class="breadcrumb">
+            <a href="/">Accueil</a> › <a href="/">Guides</a> › Banque
+        </div>
+
+        <h1>🏦 Changer d'adresse à sa banque lors d'un déménagement</h1>
+
+        <div class="meta">
+            <span>📅 Mis à jour le 15 février 2026</span>
+            <span>⏱️ Lecture : 4 min</span>
+        </div>
+
+        <p>Lors d'un déménagement, prévenir votre banque de votre nouvelle adresse est une <strong>démarche
+                obligatoire</strong>. Elle permet de recevoir vos relevés de compte, vos nouvelles cartes bancaires et
+            toute correspondance importante à la bonne adresse.</p>
+
+        <div class="highlight">
+            <strong>💡 Le saviez-vous ?</strong> En France, plus de <strong>3,5 millions de personnes déménagent chaque
+                année</strong>. La banque fait partie des 5 premiers organismes à prévenir, avec la Sécurité sociale,
+            les impôts, la CAF et l'assurance.
+        </div>
+
+        <h2>Quelles banques prévenir ?</h2>
+        <p>Vous devez prévenir <strong>toutes les banques</strong> où vous possédez un compte (compte courant, livret A,
+            PEL, assurance-vie, etc.) :</p>
+
+        <div class="card">
+            <h3>🏦 Banques traditionnelles</h3>
+            <ul>
+                <li><strong>BNP Paribas</strong> — En agence, par courrier ou via l'espace client mabanque.bnpparibas
+                </li>
+                <li><strong>Société Générale</strong> — Via l'application ou en agence</li>
+                <li><strong>Crédit Agricole</strong> — Contactez votre agence de rattachement</li>
+                <li><strong>LCL</strong> — Espace client en ligne ou en agence</li>
+                <li><strong>Banque Populaire</strong> — En agence de rattachement</li>
+                <li><strong>Caisse d'Épargne</strong> — Espace sécurisé en ligne ou en agence</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>📱 Banques en ligne</h3>
+            <ul>
+                <li><strong>Boursorama Banque</strong> — Directement dans l'app ou par email à
+                    service.client@boursorama.fr</li>
+                <li><strong>Fortuneo</strong> — Dans l'espace client ou par email</li>
+                <li><strong>N26, Revolut</strong> — Modification directe dans l'application</li>
+            </ul>
+        </div>
+
+        <h2>Quand prévenir sa banque ?</h2>
+        <p>Idéalement, <strong>2 à 4 semaines avant votre déménagement</strong>. Cela laisse le temps à la banque de
+            mettre à jour vos coordonnées avant l'envoi du prochain relevé de compte ou d'une nouvelle carte bancaire.
+        </p>
+
+        <h2>Comment faire ? 3 méthodes</h2>
+
+        <h3>1. Par courrier recommandé (le plus sûr)</h3>
+        <p>Envoyez une lettre recommandée avec accusé de réception à votre agence. C'est la méthode qui donne la
+            meilleure preuve juridique. DéménageFacile vous génère ce courrier automatiquement, formaté et prêt à
+            imprimer.</p>
+
+        <h3>2. En agence</h3>
+        <p>Passez directement à votre agence avec un justificatif de domicile du nouveau logement.</p>
+
+        <h3>3. En ligne / par email</h3>
+        <p>La plupart des banques permettent de modifier votre adresse dans votre espace client en ligne. Les banques en
+            ligne le font exclusivement par ce canal.</p>
+
+        <h2>Modèle de courrier gratuit</h2>
+
+        <div class="highlight">
+            <p><strong>Objet : Changement d'adresse — Mise à jour de mon compte bancaire</strong></p>
+            <p>Madame, Monsieur,</p>
+            <p>Par la présente, je vous informe de mon changement d'adresse à compter du [DATE].</p>
+            <p><strong>Mon adresse actuelle :</strong><br>[ANCIENNE ADRESSE]</p>
+            <p><strong>Ma nouvelle adresse :</strong><br>[NOUVELLE ADRESSE]</p>
+            <p>Je vous serais reconnaissant(e) de bien vouloir mettre à jour mes coordonnées dans vos fichiers afin que
+                l'ensemble de mes correspondances et documents soient désormais adressés à ma nouvelle adresse.</p>
+            <p>Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</p>
+        </div>
+
+        <div class="cta-box">
+            <h2>✨ Générez ce courrier automatiquement</h2>
+            <p>Entrez vos informations une seule fois et DéménageFacile génère tous vos courriers pour <strong>50+
+                    organismes</strong> — banques, assurances, énergie, télécom et plus.</p>
+            <a class="btn" href="/">🚀 Générer mes courriers gratuitement</a>
+        </div>
+
+        <h2>Documents à joindre</h2>
+        <ul>
+            <li>Justificatif de domicile du nouveau logement (facture EDF, bail, attestation d'assurance)</li>
+            <li>Pièce d'identité en cours de validité</li>
+        </ul>
+
+        <h2>Questions fréquentes</h2>
+
+        <h3>Est-ce que mes prélèvements automatiques continuent ?</h3>
+        <p>Oui, le changement d'adresse ne modifie <strong>ni votre RIB, ni vos prélèvements</strong>. Seule l'adresse
+            postale est mise à jour.</p>
+
+        <h3>Dois-je changer de banque si je déménage dans une autre région ?</h3>
+        <p>Non, sauf si vous êtes dans une banque à réseau régional (certaines Caisses d'Épargne ou Crédit Agricole).
+            Dans ce cas, demandez un <strong>transfert de compte</strong> vers l'agence la plus proche de votre nouveau
+            domicile.</p>
+
+        <h3>Le changement d'adresse est-il payant ?</h3>
+        <p>Non, le changement d'adresse est <strong>toujours gratuit</strong>.</p>
+    </article>
+
+    <footer class="footer">
+        <p>🏠 <a href="/">DéménageFacile</a> — Simplifie votre déménagement administratif</p>
+        <p>Vos données restent sur votre navigateur. Aucune donnée n'est envoyée à un serveur.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changer d'adresse carte grise (ANTS) lors d'un déménagement — Guide | DéménageFacile</title>
+    <meta name="description"
+        content="Comment modifier l'adresse sur votre carte grise via ANTS. Démarche obligatoire sous 1 mois, gratuite. Guide complet étape par étape.">
+    <meta property="og:title" content="Changer d'adresse carte grise — Guide DéménageFacile">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="/og-image.png">
+    <link rel="canonical" href="https://demenage-facile.vercel.app/guide/carte-grise">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.7
+        }
+
+        .nav {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            background: rgba(10, 10, 26, .8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            padding: .6rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: transform .2s
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, .4)
+        }
+
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem
+        }
+
+        .breadcrumb {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2rem
+        }
+
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2e8f0, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .meta {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            display: flex;
+            gap: 1.5rem
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #f8fafc
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 1.5rem 0 .5rem;
+            color: #c7d2fe
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1
+        }
+
+        ul,
+        ol {
+            margin: .5rem 0 1.5rem 1.5rem;
+            color: #cbd5e1
+        }
+
+        li {
+            margin-bottom: .4rem
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0
+        }
+
+        .card h3 {
+            margin-top: 0
+        }
+
+        .highlight {
+            background: rgba(239, 68, 68, .15);
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0
+        }
+
+        .highlight.info {
+            background: rgba(99, 102, 241, .15);
+            border-left-color: #6366f1
+        }
+
+        strong {
+            color: #f8fafc
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, .2), rgba(139, 92, 246, .2));
+            border: 1px solid rgba(99, 102, 241, .3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0
+        }
+
+        .cta-box h2 {
+            margin-top: 0
+        }
+
+        .cta-box .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            text-decoration: none;
+            padding: .9rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            transition: transform .2s
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, .5)
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #475569;
+            font-size: .85rem;
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        @media(max-width:640px) {
+            h1 {
+                font-size: 1.6rem
+            }
+
+            .article {
+                padding: 2rem 1rem 3rem
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Changer d'adresse carte grise lors d'un déménagement",
+    "author": { "@type": "Organization", "name": "DéménageFacile" },
+    "datePublished": "2026-02-15"
+  }
+  </script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">🏠 DéménageFacile</a>
+        <a class="nav-cta" href="/">🚀 Générer mes courriers</a>
+    </nav>
+
+    <article class="article">
+        <div class="breadcrumb">
+            <a href="/">Accueil</a> › <a href="/">Guides</a> › Carte grise
+        </div>
+
+        <h1>🚗 Changer l'adresse de sa carte grise lors d'un déménagement</h1>
+
+        <div class="meta">
+            <span>📅 Mis à jour le 15 février 2026</span>
+            <span>⏱️ Lecture : 3 min</span>
+        </div>
+
+        <p>La mise à jour de l'adresse sur votre <strong>certificat d'immatriculation (carte grise)</strong> est une
+            <strong>obligation légale</strong>. Vous disposez d'<strong>un mois</strong> après votre déménagement pour
+            effectuer cette démarche.</p>
+
+        <div class="highlight">
+            <strong>⚠️ Obligatoire :</strong> L'article R.322-7 du Code de la route impose de <strong>modifier l'adresse
+                de la carte grise dans le mois</strong> suivant le déménagement. En cas de contrôle, le défaut de mise à
+            jour est passible d'une <strong>amende de 135€</strong>.
+        </div>
+
+        <h2>Comment faire (100% en ligne, gratuit)</h2>
+        <ol>
+            <li>Allez sur <strong>ants.gouv.fr</strong> (Agence Nationale des Titres Sécurisés)</li>
+            <li>Connectez-vous via <strong>FranceConnect</strong> (impots.gouv.fr, Ameli, etc.)</li>
+            <li>Cliquez sur <strong>"Changement d'adresse"</strong></li>
+            <li>Entrez votre <strong>numéro d'immatriculation</strong> et votre nouvelle adresse</li>
+            <li>Validez — vous recevrez un <strong>courrier avec l'étiquette</strong> à coller sur votre carte grise
+            </li>
+        </ol>
+
+        <div class="highlight info" style="background:rgba(99,102,241,.15);border-left-color:#6366f1;">
+            <strong>💡 Bon à savoir :</strong> La démarche est <strong>gratuite</strong> pour les 3 premiers changements
+            d'adresse. Vous recevrez une étiquette autocollante à apposer sur votre carte grise. Aucun nouveau document
+            physique n'est envoyé.
+        </div>
+
+        <h2>Documents nécessaires</h2>
+        <ul>
+            <li>Numéro d'immatriculation du véhicule (format AA-123-BB)</li>
+            <li>Identifiants FranceConnect</li>
+            <li>Nouvelle adresse complète</li>
+        </ul>
+
+        <h2>Cas particuliers</h2>
+
+        <div class="card">
+            <h3>🚗 Plusieurs véhicules</h3>
+            <p>Vous devez faire la démarche pour <strong>chaque véhicule</strong> immatriculé à votre nom (voiture,
+                moto, scooter, camping-car...).</p>
+        </div>
+
+        <div class="card">
+            <h3>👫 Véhicule en co-titulaire</h3>
+            <p>Les deux titulaires doivent donner leur accord pour le changement d'adresse. La démarche se fait au nom
+                du titulaire principal.</p>
+        </div>
+
+        <div class="cta-box">
+            <h2>✨ Besoin de prévenir d'autres organismes ?</h2>
+            <p>Carte grise, banque, assurance, CAF, impôts... DéménageFacile génère <strong>tous vos courriers</strong>
+                en 5 minutes.</p>
+            <a class="btn" href="/">🚀 Générer mes courriers gratuitement</a>
+        </div>
+
+        <h2>Questions fréquentes</h2>
+
+        <h3>Combien de temps pour recevoir l'étiquette ?</h3>
+        <p>Comptez <strong>5 à 10 jours ouvrés</strong>. L'étiquette est envoyée par La Poste en lettre suivie à votre
+            nouvelle adresse.</p>
+
+        <h3>Mon assurance auto est-elle impactée ?</h3>
+        <p>Oui ! Pensez à <strong>prévenir votre assurance auto</strong> également. Votre prime peut varier selon votre
+            zone géographique (ville, campagne, taux de vol).</p>
+    </article>
+
+    <footer class="footer">
+        <p>🏠 <a href="/">DéménageFacile</a> — Simplifie votre déménagement administratif</p>
+    </footer>
+</body>
+
+</html>

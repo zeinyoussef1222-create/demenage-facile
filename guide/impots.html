@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changer d'adresse aux impôts lors d'un déménagement — Guide | DéménageFacile</title>
+    <meta name="description"
+        content="Comment déclarer votre changement d'adresse au centre des impôts (impots.gouv.fr). Obligatoire pour la taxe d'habitation et le prélèvement à la source. Guide étape par étape.">
+    <meta property="og:title" content="Changer d'adresse aux impôts — Guide DéménageFacile">
+    <meta property="og:description"
+        content="Déclarez votre changement d'adresse sur impots.gouv.fr en quelques clics. Impact sur taxe d'habitation et prélèvement à la source.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="/og-image.png">
+    <link rel="canonical" href="https://demenage-facile.vercel.app/guide/impots">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.7
+        }
+
+        .nav {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            background: rgba(10, 10, 26, .8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            padding: .6rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, .4)
+        }
+
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem
+        }
+
+        .breadcrumb {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2rem
+        }
+
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2e8f0, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .meta {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            display: flex;
+            gap: 1.5rem
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #f8fafc
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 1.5rem 0 .5rem;
+            color: #c7d2fe
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1
+        }
+
+        ul,
+        ol {
+            margin: .5rem 0 1.5rem 1.5rem;
+            color: #cbd5e1
+        }
+
+        li {
+            margin-bottom: .4rem
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0
+        }
+
+        .card h3 {
+            margin-top: 0
+        }
+
+        .highlight {
+            background: rgba(99, 102, 241, .15);
+            border-left: 4px solid #6366f1;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0
+        }
+
+        strong {
+            color: #f8fafc
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, .2), rgba(139, 92, 246, .2));
+            border: 1px solid rgba(99, 102, 241, .3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0
+        }
+
+        .cta-box h2 {
+            margin-top: 0
+        }
+
+        .cta-box .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            text-decoration: none;
+            padding: .9rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, .5)
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #475569;
+            font-size: .85rem;
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        @media(max-width:640px) {
+            h1 {
+                font-size: 1.6rem
+            }
+
+            .article {
+                padding: 2rem 1rem 3rem
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Changer d'adresse aux impôts lors d'un déménagement",
+    "description": "Guide complet pour déclarer votre changement d'adresse au centre des impôts sur impots.gouv.fr.",
+    "author": { "@type": "Organization", "name": "DéménageFacile" },
+    "datePublished": "2026-02-15",
+    "publisher": { "@type": "Organization", "name": "DéménageFacile" }
+  }
+  </script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">🏠 DéménageFacile</a>
+        <a class="nav-cta" href="/">🚀 Générer mes courriers</a>
+    </nav>
+
+    <article class="article">
+        <div class="breadcrumb">
+            <a href="/">Accueil</a> › <a href="/">Guides</a> › Impôts
+        </div>
+
+        <h1>🏛️ Changer d'adresse aux impôts lors d'un déménagement</h1>
+
+        <div class="meta">
+            <span>📅 Mis à jour le 15 février 2026</span>
+            <span>⏱️ Lecture : 3 min</span>
+        </div>
+
+        <p>Le changement d'adresse auprès du <strong>centre des impôts</strong> est une démarche
+            <strong>obligatoire</strong>. Elle impacte directement votre <strong>taxe d'habitation</strong>, votre
+            <strong>taxe foncière</strong> (si propriétaire) et votre <strong>prélèvement à la source</strong>.</p>
+
+        <div class="highlight">
+            <strong>⚠️ Important :</strong> Vous devez signaler votre déménagement aux impôts <strong>dans les 3
+                mois</strong> suivant votre changement d'adresse. À défaut, vous risquez de recevoir vos avis
+            d'imposition à l'ancienne adresse.
+        </div>
+
+        <h2>Comment faire en ligne (2 minutes)</h2>
+        <ol>
+            <li>Connectez-vous sur <strong>impots.gouv.fr</strong></li>
+            <li>Cliquez sur <strong>"Mon espace particulier"</strong></li>
+            <li>Allez dans <strong>"Gérer mon profil"</strong></li>
+            <li>Cliquez sur <strong>"Signaler un changement d'adresse"</strong></li>
+            <li>Renseignez votre nouvelle adresse et validez</li>
+        </ol>
+
+        <h2>Impact sur vos impôts</h2>
+
+        <div class="card">
+            <h3>📋 Taxe d'habitation</h3>
+            <p>Vous serez imposé au <strong>1er janvier</strong> de l'année suivante sur votre nouveau logement. Si vous
+                déménagez en cours d'année, vous restez redevable de la taxe d'habitation de l'ancien logement pour
+                l'année en cours.</p>
+        </div>
+
+        <div class="card">
+            <h3>💰 Prélèvement à la source</h3>
+            <p>Le changement d'adresse <strong>ne modifie pas</strong> votre taux de prélèvement à la source. Seul un
+                changement de situation familiale ou de revenus l'impacte.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏡 Taxe foncière (propriétaires)</h3>
+            <p>Si vous vendez votre bien, le changement d'adresse est automatique lors de la vente. Si vous conservez le
+                bien et déménagez, mettez à jour votre adresse de correspondance.</p>
+        </div>
+
+        <h2>Par courrier (méthode classique)</h2>
+        <p>Vous pouvez aussi envoyer un courrier à votre centre des finances publiques. DéménageFacile vous génère ce
+            courrier automatiquement.</p>
+
+        <div class="cta-box">
+            <h2>✨ Générez tous vos courriers en un clic</h2>
+            <p>Impôts, banque, assurance, CAF, Sécu... DéménageFacile couvre <strong>50+ organismes</strong> en une
+                seule session.</p>
+            <a class="btn" href="/">🚀 C'est gratuit — Commencer maintenant</a>
+        </div>
+
+        <h2>Questions fréquentes</h2>
+
+        <h3>Je déménage le 15 mars, quand dois-je prévenir les impôts ?</h3>
+        <p>Vous pouvez le faire <strong>dès que vous connaissez votre nouvelle adresse</strong>, même avant le
+            déménagement effectif. Le changement prendra effet à la date que vous indiquez.</p>
+
+        <h3>La démarche est-elle gratuite ?</h3>
+        <p>Oui, le changement d'adresse auprès des impôts est <strong>100% gratuit</strong>, que ce soit en ligne ou par
+            courrier.</p>
+    </article>
+
+    <footer class="footer">
+        <p>🏠 <a href="/">DéménageFacile</a> — Simplifie votre déménagement administratif</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://demenage-facile.vercel.app/sitemap.xml

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changer d'adresse à la CAF lors d'un déménagement — Guide | DéménageFacile</title>
+    <meta name="description"
+        content="Comment déclarer votre déménagement à la CAF. Impact sur l'APL, l'ALS et les allocations familiales. Guide étape par étape pour ne pas perdre vos aides.">
+    <meta property="og:title" content="Changer d'adresse à la CAF — Guide DéménageFacile">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="/og-image.png">
+    <link rel="canonical" href="https://demenage-facile.vercel.app/guide/caf">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.7
+        }
+
+        .nav {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            background: rgba(10, 10, 26, .8);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            padding: .6rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: transform .2s
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, .4)
+        }
+
+        .article {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem
+        }
+
+        .breadcrumb {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2rem
+        }
+
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2e8f0, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .meta {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            display: flex;
+            gap: 1.5rem
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #f8fafc
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 1.5rem 0 .5rem;
+            color: #c7d2fe
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1
+        }
+
+        ul,
+        ol {
+            margin: .5rem 0 1.5rem 1.5rem;
+            color: #cbd5e1
+        }
+
+        li {
+            margin-bottom: .4rem
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0
+        }
+
+        .card h3 {
+            margin-top: 0
+        }
+
+        .highlight {
+            background: rgba(239, 68, 68, .15);
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0
+        }
+
+        .highlight.info {
+            background: rgba(99, 102, 241, .15);
+            border-left-color: #6366f1
+        }
+
+        strong {
+            color: #f8fafc
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, .2), rgba(139, 92, 246, .2));
+            border: 1px solid rgba(99, 102, 241, .3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0
+        }
+
+        .cta-box h2 {
+            margin-top: 0
+        }
+
+        .cta-box .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            text-decoration: none;
+            padding: .9rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            transition: transform .2s
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, .5)
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #475569;
+            font-size: .85rem;
+            border-top: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none
+        }
+
+        @media(max-width:640px) {
+            h1 {
+                font-size: 1.6rem
+            }
+
+            .article {
+                padding: 2rem 1rem 3rem
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Changer d'adresse à la CAF lors d'un déménagement",
+    "author": { "@type": "Organization", "name": "DéménageFacile" },
+    "datePublished": "2026-02-15"
+  }
+  </script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="/">🏠 DéménageFacile</a>
+        <a class="nav-cta" href="/">🚀 Générer mes courriers</a>
+    </nav>
+
+    <article class="article">
+        <div class="breadcrumb">
+            <a href="/">Accueil</a> › <a href="/">Guides</a> › CAF
+        </div>
+
+        <h1>🏛️ Changer d'adresse à la CAF lors d'un déménagement</h1>
+
+        <div class="meta">
+            <span>📅 Mis à jour le 15 février 2026</span>
+            <span>⏱️ Lecture : 4 min</span>
+        </div>
+
+        <p>Le changement d'adresse auprès de la <strong>CAF (Caisse d'Allocations Familiales)</strong> est l'une des
+            démarches les plus urgentes lors d'un déménagement. Un retard peut entraîner la <strong>suspension de vos
+                aides</strong> (APL, ALS, allocations familiales, RSA, prime d'activité).</p>
+
+        <div class="highlight">
+            <strong>🚨 Attention :</strong> Si vous touchez l'<strong>APL ou l'ALS</strong>, vous devez impérativement
+            déclarer votre déménagement à la CAF. Votre ancien droit est supprimé et un nouveau doit être ouvert pour
+            votre nouveau logement. <strong>Sans déclaration, vos aides sont coupées.</strong>
+        </div>
+
+        <h2>Quand prévenir la CAF ?</h2>
+        <p>Déclarez votre déménagement <strong>dès que possible</strong>, idéalement <strong>le mois du
+                déménagement</strong>. La CAF recalcule vos droits en fonction de votre nouveau logement (loyer, zone
+            géographique, composition du foyer).</p>
+
+        <h2>Comment faire en ligne (5 minutes)</h2>
+        <ol>
+            <li>Connectez-vous sur <strong>caf.fr</strong> ou l'application mobile "Caf - Mon Compte"</li>
+            <li>Allez dans <strong>"Mon Compte"</strong> → <strong>"Déclarer un changement"</strong></li>
+            <li>Sélectionnez <strong>"Changement de logement"</strong></li>
+            <li>Renseignez votre nouvelle adresse, nouveau loyer, nom du propriétaire</li>
+            <li>Validez — la CAF recalcule automatiquement vos droits</li>
+        </ol>
+
+        <h2>Impact sur vos aides</h2>
+
+        <div class="card">
+            <h3>🏠 APL / ALS (Aide au logement)</h3>
+            <p>L'aide est recalculée en fonction du <strong>nouveau loyer</strong> et de la <strong>zone
+                    géographique</strong>. Elle peut augmenter ou diminuer. Le versement de l'aide au nouveau logement
+                commence le mois suivant votre déclaration.</p>
+        </div>
+
+        <div class="card">
+            <h3>👨‍👩‍👧‍👦 Allocations familiales</h3>
+            <p>Le montant ne change pas (il ne dépend pas de l'adresse), mais il est important de mettre à jour vos
+                coordonnées pour recevoir les courriers et justificatifs.</p>
+        </div>
+
+        <div class="card">
+            <h3>💶 RSA / Prime d'activité</h3>
+            <p>Ces aides peuvent être impactées par votre nouvelle situation de logement. Déclarez rapidement pour
+                éviter les trop-perçus.</p>
+        </div>
+
+        <h2>Documents nécessaires</h2>
+        <ul>
+            <li>Nouveau bail ou attestation d'hébergement</li>
+            <li>Montant du nouveau loyer (hors charges)</li>
+            <li>Nom et adresse du propriétaire ou de l'agence</li>
+            <li>Date du déménagement</li>
+        </ul>
+
+        <div class="cta-box">
+            <h2>✨ Gagnez du temps sur toutes vos démarches</h2>
+            <p>CAF, impôts, banque, assurance, énergie... DéménageFacile génère <strong>tous vos courriers</strong> en 5
+                minutes.</p>
+            <a class="btn" href="/">🚀 Générer mes courriers gratuitement</a>
+        </div>
+
+        <h2>Questions fréquentes</h2>
+
+        <h3>Je déménage dans un autre département, dois-je changer de CAF ?</h3>
+        <p>Oui, mais la CAF s'en occupe automatiquement quand vous déclarez votre changement d'adresse. Votre dossier
+            est <strong>transféré à la nouvelle CAF</strong> sans intervention de votre part.</p>
+
+        <h3>Combien de temps pour recevoir l'aide sur mon nouveau logement ?</h3>
+        <p>Comptez <strong>1 à 2 mois</strong> après votre déclaration. Le premier mois est souvent un mois de carence
+            (pas de versement), comme à votre première demande d'APL.</p>
+    </article>
+
+    <footer class="footer">
+        <p>🏠 <a href="/">DéménageFacile</a> — Simplifie votre déménagement administratif</p>
+    </footer>
+</body>
+
+</html>
